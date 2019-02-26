@@ -21,7 +21,7 @@ A tool for competitive programming in sublime text.
 ```
 - In CPHelper.py change the TEMPLATE and baseContestPath according to your needs.
 - Run CPHelper.py in the CPHelper directory.(And leave it running)
-- When on a problem page click on the CP Companion plugin, it will parse the task data and open sublime text with your template.
+- When on a problem page click on the Competitive Companion plugin, it will parse the task data and open sublime text with your template.
 - Write the code. Build and run using the new build system you made.
 - create a input.txt file and change inputTxtPath in Main.py.
 # input.txt
