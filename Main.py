@@ -8,7 +8,7 @@ DASH_COUNT = 50							# Number of dashes to print after each test case.
 
 compiler = CPPCompiler(BASE_PATH)		# cplusplus compiler.
 task = Task(BASE_PATH)					# task object to get task data
-
+inputTxtPath = "/home/schitzo/Documents/Programming/input.txt" 
 # Compile the cpp file and create a output file. Exception for Compilation error.
 try:
 	compileOutput = compiler.compile()
@@ -71,7 +71,7 @@ def getDataFromInputTxt():
 	inputData = ''
 	outputData = ''
 
-	with open("/home/schitzo/Documents/Programming/input.txt" , 'rb') as inputFile:
+	with open(inputTxtPath , 'rb') as inputFile:
 		inputData = inputFile.read();
 
 	if '--add' in inputData:
