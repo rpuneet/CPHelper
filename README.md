@@ -1,7 +1,7 @@
 # CP Helper
 A tool for competitive programming in sublime text.
 # How to set it up?
-- Install CP Companion plugin for Chrome and add port 8090 in its custom port settings.
+- Install [Competitive Companion](https://chrome.google.com/webstore/detail/competitive-companion/cjnmckjndlpiamhfimnnjmnckgghkjbl) plugin for Chrome and add port 8090 in its custom port settings.
 - Clone this repository.
 - Create a new build system in sublime text and copy paste the following. Then save it.
 ```
