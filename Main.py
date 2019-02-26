@@ -1,7 +1,7 @@
 from CPPCompiler import CPPCompiler		# For compiling and running cplusplus code
 from Task import Task 					# For getting task data like test cases
 import sys								# For system arguments and exit 
-
+import time								# For calculating runtime of a program.
 
 BASE_PATH = sys.argv[1]					# Base path of the cpp and json file
 DASH_COUNT = 50							# Number of dashes to print after each test case.
@@ -95,21 +95,26 @@ inputData , outputData = getDataFromInputTxt()
 tests = task.getTests()
 
 # Add the data of global input.txt file to the testcases.
-if {'input' : inputData , 'output' : outputData} not in tests:
+if inputData and {'input' : inputData , 'output' : outputData} not in tests:
 	tests.append({'input' : inputData , 'output' : outputData})
 
 # Check for each input/output.
 for i_o in tests:
+	startTime = time.time()
 	check_result = runAndCheck(compiler , testNumber , i_o['input'] , i_o['output'])
+	endTime = time.time()
+
 	testNumber += 1
+	print "Verdict :",
 	if check_result == 1:
 		allOkCount += 1
-		print 'Success!'
+		print 'Correct Answer'
 	elif check_result == -1:
 		allOkCount += 1
 		print 'Can\'t Say'
 	else:
 		print "Wrong Answer" 
+	print "Time Taken : " + str(endTime - startTime) + " s"
 	print '-' * DASH_COUNT
 
 
@@ -117,4 +122,4 @@ for i_o in tests:
 if testNumber == allOkCount:
 	print "\nALL OK."
 else:
-	print "\nSome test cases Failed."
+	print "\nTesting Failed"
