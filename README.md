@@ -1,5 +1,5 @@
 # CP Helper
-A tool for competetive programming in sublime text.
+A tool for competitive programming in sublime text.
 # How to set it up?
 - Install CP Companion plugin for Chrome and add port 8090 in its custom port settings.
 - Clone this repository.
