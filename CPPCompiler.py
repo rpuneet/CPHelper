@@ -1,7 +1,5 @@
 import os , subprocess
 
-TIMEOUT = 3
-
 class CPPCompiler:
 
 	def __init__(self , basePath):

@@ -17,5 +17,19 @@ class Task:
 	def getTests(self):
 		return self.taskData['tests']
 
-	def addTask(self , input , output):
-		pass
+	def addTask(self , input , output = ""):
+		toRemove = None
+
+		for test in self.taskData['tests']:
+			if test['input'].strip() == input.strip():
+				if test['output'].strip() == output.strip():
+					return
+				toRemove = test
+
+		print toRemove
+		if toRemove:
+			self.taskData['tests'].remove(toRemove)
+
+		self.taskData['tests'].append({'input' : input , 'output':output})
+		with open(self.taskBasePath + '.json' , 'wb') as jsonFile:
+			json.dump(self.taskData , jsonFile)
