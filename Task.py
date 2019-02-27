@@ -26,10 +26,10 @@ class Task:
 					return
 				toRemove = test
 
-		print toRemove
 		if toRemove:
 			self.taskData['tests'].remove(toRemove)
 
 		self.taskData['tests'].append({'input' : input , 'output':output})
 		with open(self.taskBasePath + '.json' , 'wb') as jsonFile:
 			json.dump(self.taskData , jsonFile)
+

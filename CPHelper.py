@@ -1,32 +1,12 @@
-import json , datetime
+from flask import Flask , request , redirect
+import json , subprocess
+import datetime
 import os
 
 PORT = 7175
 now = datetime.datetime.now()
 
-globalData = {}
-
-with open(os.path.join(os.path.dirname(os.path.realpath(__file__)) , 'globals.json') , 'rb') as globalJsonFile:
-	globalData = json.load(globalJsonFile)
-
-TEMPLATE = globalData['template']
-baseContestPath = globalData['baseContestPath']
-
-templateHeader = "/*\n"
-templateHeader += 'Author : {}\n'.format(globalData['author'])
-templateHeader += 'Team : {}\n'.format(globalData['teamName'])
-templateHeader += '{}\n'.format(now.strftime("Date : %d-%m-%Y\nTime : %H:%M:%S"))
-templateHeader += '*/\n\n'
-TEMPLATE = templateHeader + TEMPLATE
-
-
-from flask import Flask , request , redirect
-import json , os , subprocess
-
-app = Flask(__name__)
-
-@app.route('/' , methods = ['POST'])
-def getData():
+def createNewTask(data):
 	taskData = json.loads(request.data)
 
 	contestName = taskData['group']
@@ -57,6 +37,29 @@ def getData():
 
 		print subprocess.check_output(['subl' , os.path.join(baseContestPath , contestName , taskName + '.cpp')])
 
+
+globalData = {}
+
+with open(os.path.join(os.path.dirname(os.path.realpath(__file__)) , 'globals.json') , 'rb') as globalJsonFile:
+	globalData = json.load(globalJsonFile)
+
+TEMPLATE = globalData['template']
+baseContestPath = globalData['baseContestPath']
+
+templateHeader = "/*\n"
+templateHeader += 'Author : {}\n'.format(globalData['author'])
+templateHeader += 'Team : {}\n'.format(globalData['teamName'])
+templateHeader += '{}\n'.format(now.strftime("Date : %d-%m-%Y\nTime : %H:%M:%S"))
+templateHeader += '*/\n\n'
+TEMPLATE = templateHeader + TEMPLATE
+
+
+
+app = Flask(__name__)
+
+@app.route('/' , methods = ['POST'])
+def getData():
+	createNewTask(request.data)
 	return redirect('/')
 
 app.run(port=PORT)
