@@ -22,11 +22,11 @@ All you have to do is click on the competitive companion plug-in when a problem 
     ]
 }
 ```
-- In CPHelper.py change the TEMPLATE and baseContestPath according to your needs.
+- In generateGlobalJson.py change the TEMPLATE and baseContestPath according to your needs and run it to generate the globals.json file.
 - Run CPHelper.py in the CPHelper directory.(And leave it running)
 - When on a problem page click on the Competitive Companion plugin, it will parse the task data and open sublime text with your template.
 - Write the code. Build and run using the new build system you made and you are good to go.
-- For checking with custom test cases create a input.txt file and change inputTxtPath in Main.py.
+- For checking with custom test cases create a input.txt file and change inputTxtPath in generateGlobalJson.py, run it to change the globals.json.
 # input.txt
 In this file you can enter a test case and it will be checked allong with the sample test cases of the problem.
 To specify the correct output of this test case use --output. It will validate this test case with the provided output.
