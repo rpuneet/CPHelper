@@ -4,7 +4,7 @@ This tool uses competitve companion to get the parsed data of a competitve codin
 All you have to do is click on the competitive companion plug-in when a problem page and the start coding. Run your code and it will automatically check your code's output for the sample test cases given in the problem. You can also add and check with your custom test cases using the input.txt file.
 
 # How to set it up?
-- Install [Competitive Companion](https://chrome.google.com/webstore/detail/competitive-companion/cjnmckjndlpiamhfimnnjmnckgghkjbl) plugin for Chrome and add port 8090 in its custom port settings.
+- Install [Competitive Companion](https://chrome.google.com/webstore/detail/competitive-companion/cjnmckjndlpiamhfimnnjmnckgghkjbl) plugin for Chrome and add port 7175 in its custom port settings.
 - Clone this repository.
 - Create a new build system in sublime text and copy paste the following. Then save it.
 ```
