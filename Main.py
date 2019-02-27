@@ -2,13 +2,24 @@ from CPPCompiler import CPPCompiler		# For compiling and running cplusplus code
 from Task import Task 					# For getting task data like test cases
 import sys								# For system arguments and exit 
 import time								# For calculating runtime of a program.
+import os
+import json
 
-BASE_PATH = sys.argv[1]					# Base path of the cpp and json file
-DASH_COUNT = 50							# Number of dashes to print after each test case.
+BASE_PATH = sys.argv[1]					# Base path of the cpp and json file i.e. path of file without extension.
+
+globalData = {}
+
+with open(os.path.join(os.path.dirname(os.path.realpath(__file__)) , 'globals.json') , 'rb') as globalJsonFile:
+	globalData = json.load(globalJsonFile)
+
+DASH_COUNT = globalData['dashCount']	# Number of dashes to print after each test case.
+inputTxtPath = globalData['inputTxtPath']
+TEMPLATE = globalData['template']
+
 
 compiler = CPPCompiler(BASE_PATH)		# cplusplus compiler.
 task = Task(BASE_PATH)					# task object to get task data
-inputTxtPath = "/home/schitzo/Documents/Programming/input.txt" 
+
 # Compile the cpp file and create a output file. Exception for Compilation error.
 try:
 	compileOutput = compiler.compile()
@@ -34,7 +45,7 @@ def runAndCheck(compiler , testCaseNo ,input = "" , expectedOutput = None):
 		runOutput = compiler.run(input)
 	except:
 		print "\nRuntime Error"
-		exit(0)
+		return
 
 	if not expectedOutput:
 		expectedOutput = None
@@ -62,6 +73,7 @@ def runAndCheck(compiler , testCaseNo ,input = "" , expectedOutput = None):
 Description - This functions reads the data from a global input.txt files and returns it.
 				If --add is at the beginning of the test case the adds it to the task data json file.
 				If --output is presents then adds the expected output as well.
+				If --testing test the given file with brute code and test case generator.
 Parameters -
 	None.
 Returns - 
@@ -92,11 +104,13 @@ allOkCount = 0
 
 inputData , outputData = getDataFromInputTxt()
 
+
 tests = task.getTests()
 
 # Add the data of global input.txt file to the testcases.
 if inputData and {'input' : inputData , 'output' : outputData} not in tests:
 	tests.append({'input' : inputData , 'output' : outputData})
+
 
 # Check for each input/output.
 for i_o in tests:
