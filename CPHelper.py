@@ -1,10 +1,12 @@
 import json , datetime
+import os
 
+PORT = 7175
 now = datetime.datetime.now()
 
 globalData = {}
 
-with open('globals.json' , 'rb') as globalJsonFile:
+with open(os.path.join(os.path.dirname(os.path.realpath(__file__)) , 'globals.json') , 'rb') as globalJsonFile:
 	globalData = json.load(globalJsonFile)
 
 TEMPLATE = globalData['template']
@@ -57,4 +59,4 @@ def getData():
 
 	return redirect('/')
 
-app.run(port=8090)
+app.run(port=PORT)
