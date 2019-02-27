@@ -1,6 +1,4 @@
 TEMPLATE = '''
-//   @author - Puneet
-
 #include<bits/stdc++.h>
 #define ll long long
 #define ld long double
@@ -194,6 +192,8 @@ D['template'] = TEMPLATE
 D['inputTxtPath'] = "/home/schitzo/Documents/Programming/input.txt"
 D['dashCount'] = 50
 D['baseContestPath'] = "/home/schitzo/Documents/Programming"
+D['author'] = 'Puneet Rai'
+D['teamName'] = 'BlundersPride'
 
 with open('globals.json' , 'wb') as glob:
 	json.dump(D , glob)

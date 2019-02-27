@@ -1,4 +1,6 @@
-import json
+import json , datetime
+
+now = datetime.datetime.now()
 
 globalData = {}
 
@@ -7,6 +9,14 @@ with open('globals.json' , 'rb') as globalJsonFile:
 
 TEMPLATE = globalData['template']
 baseContestPath = globalData['baseContestPath']
+
+templateHeader = "/*\n"
+templateHeader += 'Author : {}\n'.format(globalData['author'])
+templateHeader += 'Team : {}\n'.format(globalData['teamName'])
+templateHeader += '{}\n'.format(now.strftime("Date : %d-%m-%Y\nTime : %H:%M:%S"))
+templateHeader += '*/\n\n'
+TEMPLATE = templateHeader + TEMPLATE
+
 
 from flask import Flask , request , redirect
 import json , os , subprocess
