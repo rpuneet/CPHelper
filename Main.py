@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from CPPCompiler import CPPCompiler		# For compiling and running cplusplus code
 from Task import Task 					# For getting task data like test cases
 import sys								# For system arguments and exit 
@@ -44,30 +45,37 @@ def runAndCheck(compiler , testCaseNo ,input = "" , expectedOutput = None):
 	try:
 		runOutput = compiler.run(input)
 	except:
-		print "\nRuntime Error"
+		print "\nRuntime Error ❌"
 		return
+
+	checkResult = None
 
 	if not expectedOutput:
 		expectedOutput = None
 
-	print "Test Case #%s : \nInput : " %testCaseNo
-	print input
-
-	if expectedOutput != None:
-		expectedOutput = expectedOutput.strip()
-		print "\nExpected Output : "
-		print expectedOutput + "\n"
-
-	runOutput = runOutput.strip()
-	print "Actual Output : "
-	print runOutput + "\n"
-
 	if expectedOutput == None:
-		return -1
-	if runOutput == expectedOutput:
-		return 1
+		checkResult = -1
+	elif runOutput == expectedOutput:
+		checkResult = 1
 	else:
-		return 0
+		checkResult = 0
+
+	if checkResult == 0 or checkResult == -1:
+		print "Test Case #%s : \nInput : " %testCaseNo
+		print input
+
+		if expectedOutput != None:
+			expectedOutput = expectedOutput.strip()
+			print "\nExpected Output : "
+			print expectedOutput + "\n"
+
+		runOutput = runOutput.strip()
+		print "Actual Output : "
+		print runOutput + "\n"
+	else:
+		print "Test Case : #%s" %testCaseNo
+	return checkResult
+
 
 '''
 Description - This functions reads the data from a global input.txt files and returns it.
@@ -122,18 +130,19 @@ for i_o in tests:
 	print "Verdict :",
 	if check_result == 1:
 		allOkCount += 1
-		print 'Correct Answer'
+		print 'AC ✔️'
 	elif check_result == -1:
 		allOkCount += 1
 		print 'Can\'t Say'
 	else:
-		print "Wrong Answer" 
-	print "Time Taken : " + str(endTime - startTime) + " s"
+		print "WA ❌"
+
+	print "Time Taken : " + str(round(endTime - startTime , 5)) + " s"
 	print '-' * DASH_COUNT
 
 
 
 if testNumber == allOkCount:
-	print "\nALL OK."
+	print "\nALL OK. 👍"
 else:
-	print "\nTesting Failed"
+	print "\nTesting Failed 👎"
