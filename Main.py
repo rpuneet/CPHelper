@@ -53,6 +53,9 @@ def runAndCheck(compiler , testCaseNo ,input = "" , expectedOutput = None):
 	if not expectedOutput:
 		expectedOutput = None
 
+	runOutput = runOutput.strip()
+	expectedOutput = expectedOutput.strip()
+
 	if expectedOutput == None:
 		checkResult = -1
 	elif runOutput == expectedOutput:
