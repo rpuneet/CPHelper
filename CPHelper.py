@@ -4,10 +4,21 @@ import datetime
 import os
 
 PORT = 7175
-now = datetime.datetime.now()
 
 def createNewTask(data):
-	taskData = json.loads(request.data)
+
+	now = datetime.datetime.now()
+	TEMPLATE = globalData['template']
+	baseContestPath = globalData['baseContestPath']
+
+	templateHeader = "/*\n"
+	templateHeader += 'Author : {}\n'.format(globalData['author'])
+	templateHeader += 'Team : {}\n'.format(globalData['teamName'])
+	templateHeader += '{}\n'.format(now.strftime("Date : %d-%m-%Y\nTime : %H:%M:%S"))
+	templateHeader += '*/\n\n'
+	TEMPLATE = templateHeader + TEMPLATE
+
+	taskData = json.loads(data)
 
 	contestName = taskData['group']
 	taskName = taskData['name']
@@ -42,18 +53,7 @@ globalData = {}
 
 with open(os.path.join(os.path.dirname(os.path.realpath(__file__)) , 'globals.json') , 'rb') as globalJsonFile:
 	globalData = json.load(globalJsonFile)
-
-TEMPLATE = globalData['template']
-baseContestPath = globalData['baseContestPath']
-
-templateHeader = "/*\n"
-templateHeader += 'Author : {}\n'.format(globalData['author'])
-templateHeader += 'Team : {}\n'.format(globalData['teamName'])
-templateHeader += '{}\n'.format(now.strftime("Date : %d-%m-%Y\nTime : %H:%M:%S"))
-templateHeader += '*/\n\n'
-TEMPLATE = templateHeader + TEMPLATE
-
-
+	
 
 app = Flask(__name__)
 

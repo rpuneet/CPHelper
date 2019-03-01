@@ -18,7 +18,7 @@ inputTxtPath = globalData['inputTxtPath']
 TEMPLATE = globalData['template']
 
 
-compiler = CPPCompiler(BASE_PATH)		# cplusplus compiler.
+compiler = CPPCompiler(BASE_PATH)		# cplusplus compiler.	
 task = Task(BASE_PATH)					# task object to get task data
 
 # Compile the cpp file and create a output file. Exception for Compilation error.
@@ -54,7 +54,7 @@ def runAndCheck(compiler , testCaseNo ,input = "" , expectedOutput = None):
 		expectedOutput = None
 
 	runOutput = runOutput.strip()
-	expectedOutput = expectedOutput.strip()
+	if expectedOutput: expectedOutput = expectedOutput.strip()
 
 	if expectedOutput == None:
 		checkResult = -1
@@ -126,7 +126,7 @@ if inputData and {'input' : inputData , 'output' : outputData} not in tests:
 # Check for each input/output.
 for i_o in tests:
 	startTime = time.time()
-	check_result = runAndCheck(compiler , testNumber , i_o['input'] , i_o['output'])
+	check_result = runAndCheck(compiler , testNumber , i_o['input'].strip() , i_o['output'])
 	endTime = time.time()
 
 	testNumber += 1
