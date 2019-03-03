@@ -17,7 +17,7 @@ All you have to do is click on the competitive companion plug-in when a problem 
     [
         {
             "name": "Run",
-            "shell_cmd": "timeout 3s python {Path where you cloned this repo}/CPHelper/Main.py \"${file_path}/${file_base_name}\""
+            "shell_cmd": "timeout 3s python3 {Path where you cloned this repo}/CPHelper/Main.py \"${file_path}/${file_base_name}\""
         }
     ]
 }

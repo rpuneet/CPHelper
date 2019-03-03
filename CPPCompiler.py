@@ -11,14 +11,14 @@ class CPPCompiler:
 		compileCommand = "g++ {} -o {}".format(self.cppFilePath , self.outputFile)
 		compileCommand = compileCommand.split(' ')
 		output = subprocess.check_output(compileCommand)
-		return output
+		return output.decode()
 
 	def run(self , input):
 		read, write = os.pipe()
-		os.write(write, input)
+		os.write(write , input.encode())
 		os.close(write)
 
 		runCommand = "{}".format(self.outputFile)
 		runCommand.split(' ')
 		output = subprocess.check_output(runCommand, stdin=read)
-		return output
+		return output.decode()

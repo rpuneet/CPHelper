@@ -18,7 +18,7 @@ def createNewTask(data):
 	templateHeader += '*/\n\n'
 	TEMPLATE = templateHeader + TEMPLATE
 
-	taskData = json.loads(data)
+	taskData = json.loads(data.decode())
 
 	contestName = taskData['group']
 	taskName = taskData['name']
@@ -41,12 +41,12 @@ def createNewTask(data):
 			os.mkdir(os.path.join(baseContestPath , contestName))
 
 		with open(os.path.join(baseContestPath , contestName , taskName + '.json') , 'wb') as taskJsonFile:
-			json.dump(taskData , taskJsonFile)
+			taskJsonFile.write(json.dumps(taskData).encode())
 		
 		with open(os.path.join(baseContestPath , contestName , taskName + '.cpp') , 'wb') as taskCppFile:
-			taskCppFile.write(TEMPLATE)
+			taskCppFile.write(TEMPLATE.encode())
 
-		print subprocess.check_output(['subl' , os.path.join(baseContestPath , contestName , taskName + '.cpp')])
+		print(subprocess.check_output(['subl' , os.path.join(baseContestPath , contestName , taskName + '.cpp')]))
 
 
 globalData = {}

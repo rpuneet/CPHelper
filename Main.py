@@ -11,7 +11,7 @@ BASE_PATH = sys.argv[1]					# Base path of the cpp and json file i.e. path of fi
 globalData = {}
 
 with open(os.path.join(os.path.dirname(os.path.realpath(__file__)) , 'globals.json') , 'rb') as globalJsonFile:
-	globalData = json.load(globalJsonFile)
+	globalData = json.loads(globalJsonFile.read().decode())
 
 DASH_COUNT = globalData['dashCount']	# Number of dashes to print after each test case.
 inputTxtPath = globalData['inputTxtPath']
@@ -25,7 +25,7 @@ task = Task(BASE_PATH)					# task object to get task data
 try:
 	compileOutput = compiler.compile()
 except:
-	print "Compilation Error"
+	print("Compilation Error")
 	exit(0)
 
 '''
@@ -64,17 +64,17 @@ def runAndCheck(compiler , testCaseNo ,input = "" , expectedOutput = None):
 		checkResult = 0
 
 	if checkResult == 0 or checkResult == -1:
-		print "Input : "
-		print input
+		print("Input : ")
+		print(input)
 
 		if expectedOutput != None:
 			expectedOutput = expectedOutput.strip()
-			print "\nExpected Output : "
-			print expectedOutput + "\n"
+			print("\nExpected Output : ")
+			print(expectedOutput + "\n")
 
 		runOutput = runOutput.strip()
-		print "Actual Output : "
-		print runOutput + "\n"
+		print("Actual Output : ")
+		print(runOutput + "\n")
 		
 	return checkResult
 
@@ -94,7 +94,7 @@ def getDataFromInputTxt():
 	outputData = ''
 
 	with open(inputTxtPath , 'rb') as inputFile:
-		inputData = inputFile.read();
+		inputData = inputFile.read().decode();
 
 	if '--add' in inputData:
 		inputData = inputData[6:]
@@ -124,30 +124,30 @@ if inputData and {'input' : inputData , 'output' : outputData} not in tests:
 
 # Check for each input/output.
 for i_o in tests:
-	print "Test Case : %s" %testNumber
+	print("Test Case : {}".format(testNumber))
 	startTime = time.time()
 	check_result = runAndCheck(compiler , testNumber , i_o['input'].strip() , i_o['output'])
 	endTime = time.time()
 
 	testNumber += 1
-	print "Verdict :",
+	print("Verdict :" , end = " ")
 	if check_result == 1:
 		allOkCount += 1
-		print 'AC ✔️'
+		print('AC ✔️')
 	elif check_result == -1:
 		allOkCount += 1
-		print 'Can\'t Say 🤷‍♂️'
+		print('Can\'t Say 🤷‍♂️')
 	elif check_result == -2:
-		print "RE ⚠️"
+		print("RE ⚠️")
 	else:
-		print "WA ❌"
+		print("WA ❌")
 
-	print "Time Taken : " + str(round(endTime - startTime , 5)) + " s"
-	print '-' * DASH_COUNT
+	print("Time Taken : " + str(round(endTime - startTime , 5)) + " s")
+	print('-' * DASH_COUNT)
 
 
 
 if testNumber == allOkCount:
-	print "\nALL OK. 👍"
+	print("\nALL OK. 👍")
 else:
-	print "\nTesting Failed 👎"
+	print("\nTesting Failed 👎")

@@ -196,4 +196,4 @@ D['author'] = 'Puneet Rai'
 D['teamName'] = 'BlundersPride'
 
 with open('globals.json' , 'wb') as glob:
-	json.dump(D , glob)
+	glob.write(json.dumps(D).encode())
