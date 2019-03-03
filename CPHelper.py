@@ -52,7 +52,7 @@ def createNewTask(data):
 globalData = {}
 
 with open(os.path.join(os.path.dirname(os.path.realpath(__file__)) , 'globals.json') , 'rb') as globalJsonFile:
-	globalData = json.load(globalJsonFile)
+	globalData = json.loads(globalJsonFile.read().decode())
 	
 
 app = Flask(__name__)

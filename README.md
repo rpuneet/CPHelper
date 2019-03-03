@@ -49,6 +49,7 @@ Example -
 # To-Do
 - Add testing of a task using brute force code and test case generator.
 - Add special case for interactive problems.
+- Make directory of a contest in the in the corresponding directory of the website.
 
 # Screenshots
 ![](./Screenshots/screenshot1.png)
