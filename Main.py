@@ -39,14 +39,14 @@ Returns -
 	1 - If the expected output is same as the actual output.
 	0 - If the expected output is different from actual output.
    -1 - If no expected output is provided.
+   -2 - Runtime error. or any other problem during execution (Not TLE though).
 '''
 def runAndCheck(compiler , testCaseNo ,input = "" , expectedOutput = None):
 	# Run and get the output of the program for the given input. Exception for runtime error.
 	try:
 		runOutput = compiler.run(input)
 	except:
-		print "\nRuntime Error ❌"
-		return
+		return -2
 
 	checkResult = None
 
@@ -64,7 +64,7 @@ def runAndCheck(compiler , testCaseNo ,input = "" , expectedOutput = None):
 		checkResult = 0
 
 	if checkResult == 0 or checkResult == -1:
-		print "Test Case #%s : \nInput : " %testCaseNo
+		print "Input : "
 		print input
 
 		if expectedOutput != None:
@@ -75,8 +75,7 @@ def runAndCheck(compiler , testCaseNo ,input = "" , expectedOutput = None):
 		runOutput = runOutput.strip()
 		print "Actual Output : "
 		print runOutput + "\n"
-	else:
-		print "Test Case : #%s" %testCaseNo
+		
 	return checkResult
 
 
@@ -125,6 +124,7 @@ if inputData and {'input' : inputData , 'output' : outputData} not in tests:
 
 # Check for each input/output.
 for i_o in tests:
+	print "Test Case : %s" %testNumber
 	startTime = time.time()
 	check_result = runAndCheck(compiler , testNumber , i_o['input'].strip() , i_o['output'])
 	endTime = time.time()
@@ -136,7 +136,9 @@ for i_o in tests:
 		print 'AC ✔️'
 	elif check_result == -1:
 		allOkCount += 1
-		print 'Can\'t Say'
+		print 'Can\'t Say 🤷‍♂️'
+	elif check_result == -2:
+		print "RE ⚠️"
 	else:
 		print "WA ❌"
 
