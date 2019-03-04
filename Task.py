@@ -32,5 +32,5 @@ class Task:
 
 		self.taskData['tests'].append({'input' : input , 'output':output})
 		with open(self.taskBasePath + '.json' , 'wb') as jsonFile:
-			json.dump(self.taskData , jsonFile)
+			jsonFile.write(json.dumps(self.taskData).encode())
 
